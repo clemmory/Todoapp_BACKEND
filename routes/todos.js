@@ -14,9 +14,9 @@ router.get('/', function(req, res) {
 
 /* ADD todo */
 router.post('/', (req,res) => {
-  const { due_date, description, tag, status } = req.body
+  const { due_date, description, status} = req.body
 
-  pool.query('INSERT INTO todos (due_date, description, tag, status) VALUES ($1, $2, $3, $4)', [due_date, description, tag, status], (error, results) => {
+  pool.query('INSERT INTO todos (due_date, description,status) VALUES ($1, $2, $3)', [due_date, description,status], (error, results) => {
     if (error) {
       throw error
     }
@@ -38,9 +38,9 @@ router.get('/:id', (req,res) => {
 /* Update todo by Id */
 router.put('/:id', (req,res) => {
   const id = parseInt(req.params.id);
-  const { due_date, description, tag, status } = req.body
+  const { due_date, description,status } = req.body
 
-  pool.query('UPDATE todos SET due_date=$1, description=$2, tag=$3, status =$4 WHERE id=$5',[due_date, description, tag, status,id], (error,results) => {
+  pool.query('UPDATE todos SET due_date=$1, description=$2,status =$3 WHERE id=$4',[due_date, description,status,id], (error,results) => {
     if (error) {
       throw error
     }

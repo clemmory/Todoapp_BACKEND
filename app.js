@@ -5,6 +5,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var todosRouter = require('./routes/todos');
+var tagsRouter =require('./routes/tags');
 
 var app = express();
 
@@ -16,5 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/api/todos', todosRouter);
+app.use('/api/tags', tagsRouter);
 
 module.exports = app;
