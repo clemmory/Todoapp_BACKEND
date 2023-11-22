@@ -18,9 +18,9 @@ router.post('/', (req,res) => {
 
   pool.query('INSERT INTO todos (due_date, description,status) VALUES ($1, $2, $3)', [due_date, description,status], (error, results) => {
     if (error) {
-      throw error
+      res.status(500).json({error: 'Unable to create todo'})
     }
-    res.status(201).send( 'Todo created successfully!')
+    res.status(201).json( {result: true, todo: results})
   })
 });
 
@@ -35,12 +35,26 @@ router.get('/:id', (req,res) => {
   })
 });
 
+// GET todo by date
+router.get('/:date', (req,res) => {
+  const date = req.params.date;
+  console.log(date)
+  pool.query('SELECT * FROM todos WHERE due_date=$1', [date], (error, results) => {
+    if (error) {
+      throw error
+    }
+    res.status(200).json(results.rows);
+  })
+})
+
 /* Update todo by Id */
 router.put('/:id', (req,res) => {
   const id = parseInt(req.params.id);
-  const { due_date, description,status } = req.body
+  const {due_date, description,status } = req.body
 
-  pool.query('UPDATE todos SET due_date=$1, description=$2,status =$3 WHERE id=$4',[due_date, description,status,id], (error,results) => {
+  pool.query(
+    'UPDATE todos SET due_date=$1, description=$2, status=$3 WHERE id=$4', 
+    [due_date, description, status,id], (error,results) => {
     if (error) {
       throw error
     }
