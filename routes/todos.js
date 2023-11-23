@@ -58,7 +58,7 @@ router.put('/:id', (req,res) => {
     if (error) {
       throw error
     }
-    res.status(200).send('todo modified successfully!')
+    res.status(200).json( {result: true})
   })
 });
 
