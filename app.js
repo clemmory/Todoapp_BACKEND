@@ -11,7 +11,10 @@ var tagsRouter =require('./routes/tags');
 
 var app = express();
 const cors = require('cors');
-app.use(cors());
+const corsOptions = {
+    origin: 'http://localhost:3001',
+  };
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(express.json());
