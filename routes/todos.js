@@ -18,7 +18,7 @@ router.post('/', (req,res) => {
 
   pool.query('INSERT INTO todos (due_date, description,status) VALUES ($1, $2, $3)', [due_date, description,status], (error, results) => {
     if (error) {
-      res.status(500).json({error: 'Unable to create todo'})
+      res.status(500).json({result: false, error: 'Unable to create todo'})
     }
     res.status(201).json( {result: true, todo: results})
   })
