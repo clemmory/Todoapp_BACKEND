@@ -1,5 +1,3 @@
-require('dotenv').config();
-
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
@@ -8,13 +6,10 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var todosRouter = require('./routes/todos');
 var tagsRouter =require('./routes/tags');
-
 var app = express();
 const cors = require('cors');
-const corsOptions = {
-    origin: 'http://localhost:3001',
-  };
-app.use(cors(corsOptions));
+app.use(cors());
+
 
 app.use(logger('dev'));
 app.use(express.json());
