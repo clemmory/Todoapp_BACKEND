@@ -7,11 +7,13 @@ const dbHost = process.env.HOST
 const dbName = process.env.DATABASE;
 const dbPass = process.env.PASSWORD;
 
+
 const pool = new Pool({
     user: dbUser,
     host: dbHost,
     database: dbName,
     password: dbPass,
+    port: 5432,
 
   })
 
@@ -22,6 +24,3 @@ const pool = new Pool({
 
 
 module.exports = pool;
-
-// connectionString: process.env.POSTGRES_URL + "?sslmode=require",
-// })
